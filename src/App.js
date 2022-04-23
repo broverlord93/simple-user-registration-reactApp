@@ -1,31 +1,26 @@
 import React, {useState} from 'react';
 
-import Users from "./components/Users/Users";
-import UserForm from "./components/Users/UserForm";
-import Modal from "./components/UI/Modal";
+import AddUser from './components/Users/AddUser';
+import UsersList from './components/Users/UsersList';
 
+function App() {
+    const [usersList, setUsersList] = useState([]);
 
-const App = () => {
-    const defaultUsers = [
-        {name: "Max", age: 31, id: Math.random()}
-    ];
-    const [users, setUsers] = useState(defaultUsers);
-    // const [showModal, setShowModal] = useState(false);
-
-    const onSubmitHandler = payload => {
-
-        setUsers((prevState) => {
-            return [...prevState, payload];
+    const addUserHandler = (uName, uAge) => {
+        setUsersList((prevUsersList) => {
+            return [
+                ...prevUsersList,
+                {name: uName, age: uAge, id: Math.random().toString()},
+            ];
         });
     };
 
     return (
         <div>
-            <UserForm onSubmit={onSubmitHandler}/>
-            <Users users={users}/>
-            <Modal/>
+            <AddUser onAddUser={addUserHandler}/>
+            <UsersList users={usersList}/>
         </div>
     );
-};
+}
 
 export default App;
