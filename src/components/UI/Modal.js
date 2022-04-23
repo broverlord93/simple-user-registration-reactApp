@@ -1,11 +1,22 @@
 import React from "react";
 
-const Modal = props => {
-    // TODO: Pass modal-message to Modal
-    // TODO: Use Card to wrap component
-    return (
-        <div>
+import Card from "./Card";
+import Button from "./Button";
 
+import style from "./Modal.module.css";
+
+const Modal = props => {
+
+    const onShowModalHandler = () => {
+        props.toggleModal();
+    };
+
+    return (
+        <div className={`modal-root ${props.showModal ? style["modal-show"]:style["modal-hide"]}`}>
+            <Card >
+                <p>{props.message}</p>
+                <Button label="OK" onClick={onShowModalHandler}></Button>
+            </Card>
         </div>
     );
 };
